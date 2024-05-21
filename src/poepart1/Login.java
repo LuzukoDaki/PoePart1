@@ -1,4 +1,4 @@
-/*
+  /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -19,7 +19,7 @@ public class Login {
    private String lastName;
     
     
-    // This method ensures that any username contains an under score (_) and is no more than
+    
     public Login (){
         this.userName = "";
         this.passWord = "";
@@ -44,7 +44,7 @@ public class Login {
     }
     //setters
     public void setuserName(String userName){
-        this.userName = userName;
+        this.userName = userName;   
     }
     
     //getters
@@ -74,35 +74,16 @@ public class Login {
     public boolean checkPasswordComplexity(){
         // This method ensures that passwords meet the following password complexity rules
         // initializing variables
-        boolean minimumPassWordLength = (passWord.length()>=8);
-        boolean containsCapitalLetter = false;
-        boolean containsNumber = false;
-        boolean containsSpecialCharacter = false;
-     
-        // Declared and initialized variable for special characters
-        String specialChars = "/*!@#$%^&*()\"{}_[]|\\?/<>,.";
-
-        char[] passWordChars  = passWord.toCharArray();
-        for(int i = 0; i >= passWord.length(); i++){
-            if(Character.isUpperCase(passWordChars[i])){
-                containsCapitalLetter = true;
-                continue;                                                                 
-            }
-           if(Character.isDigit(passWordChars[i])){
-               containsNumber = true;
-               continue;
-               
-           }
-           if(specialChars.contains(passWord)){
-               containsSpecialCharacter = true;
-               
-           }
-        }
-        if(minimumPassWordLength && containsCapitalLetter && containsNumber && containsSpecialCharacter){
+        boolean upppercase_letter = passWord.matches(".*[A-Z].*");
+        boolean special_char =  passWord.matches(".*[!@|#$~%^&*()-+?./<>{}].*");
+        boolean number =  passWord.matches(".*[0-9].*");
+        boolean lowercase_letter =  passWord.matches(".*[a-z].*");
+        if(passWord.length() >=8 && upppercase_letter == true && special_char == true && number == true && lowercase_letter == true){
             return true;
+        }   else {
             
         }
-        return false;    
+           return false;
     }
     // This method returns the necessary registration messaging indicating if:
     // 1 The username is incorrectly formatted
@@ -126,21 +107,21 @@ public class Login {
     // using method that verifies that the login details entered matches the login details stored when the user registers.
     public boolean loginUser(String loginUserName, String loginPassWord){
     
-        if(loginUserName.equals(userName) || loginPassWord.equals(passWord) ){
+        if(!loginUserName.equals(userName) || !loginPassWord.equals(passWord) ){
           return false;
         }
           return true;
          
    }
-    
-    public class returnLoginStatus {
-        public String returnLoginStatus(boolean isSuccess){
-            if(isSuccess){
-                return "Welcome <user first name> ,<user last name> it is great to see you again";
-            } else { return "Username or password incorrect, please try again";
-        }
-        }       
+  
+    // Creating method to return necessay messaging for successful and failes login
+    public String returnLoginStatus(boolean isSuccess){
+        if(isSuccess){
+          return ("Welcome " + name + " " + lastName + " it is great to see you again ");
+        } else { return "Username or password incorrect, please try again";
     }
+}       
+    
         //boolean isuserLogin;
        // boolean ispassLogin;
         
